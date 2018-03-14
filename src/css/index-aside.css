@@ -1,0 +1,25 @@
+@media (min-width:500px) {
+    .page{
+        height:100vh;
+        overflow: hidden;
+        display:flex;
+    }
+}
+.page>aside{
+    border:1px solid black;
+    width:100px;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+    display:flex;
+    flex-shrink: 0;
+}
+.page>aside>.upper{
+    display:flex;
+    flex-direction: column;
+    flex-grow:1;
+}
+.page>aside>.upper>.actions>li{
+    margin:20px;
+    padding:20px 0;
+}
