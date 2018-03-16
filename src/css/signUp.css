@@ -1,4 +1,4 @@
-.login{
+.signUp{
     position:fixed;
     top:0;
     left:0;
@@ -9,7 +9,7 @@
     justify-content: center;
     align-items: center;
 }
-.login>.form{
+.signUp>.form{
     background:red;
     min-width: 300px;
     min-height: 400px;
