@@ -1,0 +1,93 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box
+}
+
+*::before, *::after {
+    box-sizing: border-box
+}
+
+a {
+    text-decoration: none;
+}
+
+li, ol {
+    list-style: none;
+}
+
+.page > main {
+    border: 1px solid red;
+    flex-grow: 1;
+    overflow: auto;
+}
+
+.button {
+    padding: 10px;
+}
+
+.resume {
+    max-width: 800px;
+    margin: 0 auto;
+    border: 1px solid black;
+}
+
+.resume > profile {
+    text-align: center;
+}
+
+.resume > section:nth-child(1){
+    text-align: center;
+}
+.resume > section > h1 {
+    text-align: center;
+    margin: 20px;
+}
+
+.resume > section > h2 {
+    text-align: center;
+    margin: 20px;
+}
+
+.resume > .skill > ul {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.resume > .skill > ul > li {
+    border: 1px green solid;
+    width: 48%;
+    padding: 10px;
+}
+
+.resume .projects > ol {
+}
+
+.resume .projects > ol > li {
+    margin: 30px 0;
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+
+.resume .projects header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.resume .projects header > .start {
+    display: flex;
+}
+
+.resume .projects header h3 {
+    margin-right: 1em;
+}
+
+.resume .projects header > .end {
+}
+
+.resume .projects heade .keywordsr {
+    display: flex;
+    align-items: center;
+}

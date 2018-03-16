@@ -1,0 +1,20 @@
+.resume input {
+    border: none;
+    font: inherit;
+}
+
+.editableSpan {
+    position: relative;
+}
+
+.editableSpan button {
+    display: none;
+    position: absolute;
+    left: 100%;
+    top: 0;
+    z-index: 1;
+}
+
+.editableSpan:hover button {
+    display: inline-block;
+}
