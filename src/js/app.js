@@ -3,7 +3,7 @@ let app= new Vue({
     data: {
         loginVisible:false,
         editingName: false,
-        signUpVisible:false,
+        signUpVisible:true,
         resume: {
             name: 'xxx',
             gender: '男',
@@ -12,6 +12,14 @@ let app= new Vue({
             phone: '1111111111111',
             email: 'example@example.com',
         },
+        signUp:{
+            email:'',
+            password:'',
+        },
+        login:{
+            email:'',
+            password:'',
+        }
     },
     methods:{
         onEdit(key,value){
@@ -24,6 +32,7 @@ let app= new Vue({
                 this.showLogin()
                 this.loginVisible = true
             } else {
+                console.log()
                 this.saveResume()
             }
 
@@ -44,7 +53,35 @@ let app= new Vue({
 
         },
         saveResume(){
+            let {id} = AV.User.current()
+            var todo = AV.Object.createWithoutData('User', id);
+            // 修改属性
+            todo.set('resume', this.resume);
+            // 保存到云端
+            todo.save();
+        },
+        onSignUp(){
+            console.log(this.signUp)
+            const user = new AV.User()
+            user.setUsername(this.signUp.email)
+            user.setPassword(this.signUp.password)
+            user.setEmail(this.signUp.email)
+            user.signUp().then(function (user) {
+                console.log(user);
+            }, function (error) {
+            });
 
+        },
+        onLogin(e){
+            AV.User.logIn(this.login.email, this.login.password).then(function (loginedUser) {
+                console.log(loginedUser);
+            }, function (error) {
+                if(error.code === 211){
+                    alert('邮箱不存在')
+                }else if(error.code === 210){
+                    alert('邮箱密码不匹配')
+                }
+            });
         },
     }
 })
