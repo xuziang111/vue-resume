@@ -83,5 +83,9 @@ let app= new Vue({
                 }
             });
         },
+        onLogout(w){
+            AV.User.logOut()
+            alert('注销成功')//清除用户缓存
+        }
     }
 })
