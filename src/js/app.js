@@ -16,6 +16,12 @@
                 jobTitle: '前端工程师',
                 phone: '1111111111111',
                 email: 'example@example.com',
+                skills:[
+                    {name:'请填写技能名称',description:'请填写技能描述'},
+                    {name:'请填写技能名称',description:'请填写技能描述'},
+                    {name:'请填写技能名称',description:'请填写技能描述'},
+                    {name:'请填写技能名称',description:'请填写技能描述'},
+                ],
             },
             signUp: {
                 email: '',
@@ -24,11 +30,22 @@
             login: {
                 email: '',
                 password: '',
-            }
+            },
         },
         methods: {
             onEdit(key, value) {
-                this.resume[key] = value;
+                let regex = /\[(\d+)\]/g
+                key = key.replace(regex,(match,number)=> `.${number}`)
+                keys = key.split('.');
+                let result = this.resume
+                for(let i=0;i<keys.length;i++){
+                    if(i === keys.length-1){
+                        result[keys[i]] = value
+                    }else{
+                        result = result[keys[i]]
+                    }
+                }
+                console.log(keys)
             },
             onClickSave() {
                 let currentUser = AV.User.current();
@@ -130,10 +147,16 @@
                     // 成功获得实例
                     console.log(user)
                     let resume = user.toJSON().resume
-                    this.resume = resume
+                    Object.assign(this.resume,resume)
                 },(error) => {
                     // 异常处理
                 });
+            },
+            addSkill(){
+              this.resume.skills.push({name:'请填写技能名称',description:'请填写技能描述'})
+            },
+            removeSkill(index){
+                this.resume.skills.splice(index,1)
             }
         }
     })

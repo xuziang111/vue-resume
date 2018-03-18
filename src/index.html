@@ -19,7 +19,7 @@
         <div class="upper">
             <ul class="actions">
                 <li><button class="button" @click="onClickSave">保存</button></li>
-                <li><button class="button">风向</button></li>
+                <li><button class="button">分享</button></li>
                 <li><button class="button">打印</button></li>
                 <li><button class="button">换肤</button></li>
             </ul>
@@ -53,22 +53,16 @@
             <section class="skill">
                 <h2>技能</h2>
                 <ul>
-                    <li>
-                        <span class="name">静态页面制作</span>
-                        <div class="description">完美实现设计稿</div>
+                    <li v-for="skill,index in resume.skills">
+                        <editable-span :value="skill.name" @edit="onEdit(`skills[${index}].name`, $event)"></editable-span>
+                        <div class="description">
+                            <editable-span :value="skill.description" @edit="onEdit(`skills[${index}].description`, $event)"></editable-span>
+                        </div>
+                        <span class="remove" v-if="index>3" @click="removeSkill(index)">X</span>
                     </li>
-                    <li>
-                        <span class="name">静态页面制作</span>
-                        <div class="description">完美实现设计稿</div>
-                    </li>
-                    <li>
-                        <span class="name">静态页面制作</span>
-                        <div class="description">完美实现设计稿</div>
-                    </li>
-                    <li>
-                        <span class="name">静态页面制作</span>
-                        <div class="description">完美实现设计稿</div>
-                    </li>
+                    <li><span @click="addSkill">
+                        添加
+                    </span></li>
                 </ul>
             </section>
             <section class="projects">

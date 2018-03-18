@@ -93,3 +93,5 @@ li, ol {
     display: flex;
     align-items: center;
 }
+.skill>ul>li{position:relative;}
+.skill>ul>li .remove{position:absolute;top:0;right:0;}
