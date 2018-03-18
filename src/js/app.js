@@ -5,6 +5,8 @@
             editingName: false,
             loginVisible: false,
             signUpVisible: false,
+            shareLink:'',
+            shareVisible:false,
             currentUser: {
                 objectId: undefined,
                 email:undefined,
@@ -21,6 +23,10 @@
                     {name:'请填写技能名称',description:'请填写技能描述'},
                     {name:'请填写技能名称',description:'请填写技能描述'},
                     {name:'请填写技能名称',description:'请填写技能描述'},
+                ],
+                projects:[
+                    {name:'请填写项目名称',link:'http://xxx.com',keywords:'请填写关键词',description:'请详细描述',},
+                    {name:'请填写项目名称',link:'http://xxx.com',keywords:'请填写关键词',description:'请详细描述',}
                 ],
             },
             signUp: {
@@ -157,13 +163,21 @@
             },
             removeSkill(index){
                 this.resume.skills.splice(index,1)
-            }
+            },
+            addProject(){
+                this.resume.projects.push({name:'请填写技能名称',description:'请填写技能描述'})
+            },
+            removeProject(index){
+                this.resume.projects.splice(index,1)
+            },
         }
     })
 let currentUser = AV.User.current()
     console.log(currentUser)
+    console.log(currentUser.toJSON())
     if(currentUser){
         app.currentUser = currentUser.toJSON()
+        app.shareLink = location.origin + location.pathname + '?user_id=' + app.currentUser.objectId
         app.getResume()
     }
 }
