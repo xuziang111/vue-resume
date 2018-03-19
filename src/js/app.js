@@ -2,11 +2,14 @@
     let app = new Vue({
         el: '#app',
         data: {
+            mainClass:'defalut',
             editingName: false,
             loginVisible: false,
             signUpVisible: false,
             shareLink:'',
             shareVisible:false,
+            skinChooserVisible:false,
+            bodyClass:'defalut',
             mode:'edit',
             currentUser: {
                 objectId: undefined,
@@ -204,6 +207,9 @@
             print(){
               window.print()
             },
+            setTheme(name){
+                document.body.className = name
+            }
         }
     })
 //获取当前用户

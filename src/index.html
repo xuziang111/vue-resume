@@ -13,9 +13,10 @@
     <link href="css/signUp.css" rel="stylesheet"/>
     <link href="css/share.css" rel="stylesheet"/>
     <link href="css/print.css" rel="stylesheet" media="print"/>
+    <link href="css/skinChooser.css" rel="stylesheet">
 </head>
 
-<body>
+<body class="defalut">
 <div class="page" id="app">
     <aside v-show="mode !== 'preview'">
         <div class="upper">
@@ -23,7 +24,7 @@
                 <li><button class="button" @click="onClickSave">保存</button></li>
                 <li><button class="button" @click="shareVisible = true">分享</button></li>
                 <li><button class="button" @click="print">打印</button></li>
-                <li><button class="button">换肤</button></li>
+                <li><button class="button" @click="skinChooserVisible = true">换肤</button></li>
                 <li class="button" @click="mode='preview'"><button>进入预览</button></li>
             </ul>
         </div>
@@ -61,7 +62,7 @@
                         </div>
                         <span class="remove" v-if="index>3 && mode === 'edit'" @click="removeSkill(index)">X</span>
                     </li>
-                    <li v-if="mode === 'edit'"><span @click="addSkill">
+                    <li class="add" v-if="mode === 'edit'"><span @click="addSkill">
                         添加
                     </span></li>
                 </ul>
@@ -82,7 +83,7 @@
                         <p class="description"><editable-span :disable="mode !== 'preview'" :value="project.description" @edit="onEdit(`projects[${index}].description`, $event)"></editable-span></p>
                         <span v-if="index>1 && mode === 'edit'" @click="removeProject(index)">X</span>
                     </li>
-                    <li v-if="mode === 'edit'"><span @click="addProject">添加</span></li>
+                    <li class="add" v-if="mode === 'edit'"><span @click="addProject">添加</span></li>
                 </ol>
             </section>
         </div>
@@ -131,6 +132,13 @@
         </div>
     </div>
     <button class="exitPre" @click="mode ='edit'" v-if="mode ==='preview'">退出预览</button>
+    <div v-show="skinChooserVisible" class="skinChooser" v-cloak>
+        <div class="skinChooser-bg">
+            <button @click="setTheme('defalut')">默认</button>
+            <button @click="setTheme('blue-grey')">蓝灰色</button>
+            <button @click="skinChooserVisible = false" type="button">关闭</button>
+        </div>
+    </div>
 </div>
 <script src="../vendors/av-min.js"></script>
 <script src="../vendors/vue.min.js"></script>

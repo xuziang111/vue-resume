@@ -100,3 +100,7 @@ li, ol {
     top:0;
     left:0;
 }
+body.blue-grey{
+    background:#2F4F4F;
+    color:#eee;
+}
