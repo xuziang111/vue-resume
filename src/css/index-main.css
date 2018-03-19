@@ -95,3 +95,8 @@ li, ol {
 }
 .skill>ul>li{position:relative;}
 .skill>ul>li .remove{position:absolute;top:0;right:0;}
+.exitPre{
+    position: absolute;
+    top:0;
+    left:0;
+}

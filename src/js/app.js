@@ -7,9 +7,28 @@
             signUpVisible: false,
             shareLink:'',
             shareVisible:false,
+            mode:'edit',
             currentUser: {
                 objectId: undefined,
                 email:undefined,
+            },
+            previewResume:{
+                name: 'xxx',
+                gender: '男',
+                birthday: '',
+                jobTitle: '前端工程师',
+                phone: '1111111111111',
+                email: 'example@example.com',
+                skills:[
+                    {name:'请填写技能名称',description:'请填写技能描述'},
+                    {name:'请填写技能名称',description:'请填写技能描述'},
+                    {name:'请填写技能名称',description:'请填写技能描述'},
+                    {name:'请填写技能名称',description:'请填写技能描述'},
+                ],
+                projects:[
+                    {name:'请填写项目名称',link:'http://xxx.com',keywords:'请填写关键词',description:'请详细描述',},
+                    {name:'请填写项目名称',link:'http://xxx.com',keywords:'请填写关键词',description:'请详细描述',}
+                ],
             },
             resume: {
                 name: 'xxx',
@@ -37,6 +56,18 @@
                 email: '',
                 password: '',
             },
+        },
+        computed:{
+            displayResmume(){
+                return this.mode === 'preview' ? this.previewResume:this.resume
+            }
+        },
+        watch:{
+            'currentUser.objectId':function(newValue,oldValue){
+                if(newValue){
+                    this.getResume(this.currentUser)
+                }
+            }
         },
         methods: {
             onEdit(key, value) {
@@ -147,13 +178,13 @@
                 }
                 alert('注销成功')//清除用户缓存
             },
-            getResume(){
+            getResume(user){
                 let query = new AV.Query('User');
-                query.get(this.currentUser.objectId).then((user) => {
+                return query.get(user.objectId).then((user) => {
                     // 成功获得实例
-                    console.log(user)
                     let resume = user.toJSON().resume
-                    Object.assign(this.resume,resume)
+                    return resume
+                    //Object.assign(this.resume,resume)
                 },(error) => {
                     // 异常处理
                 });
@@ -170,14 +201,33 @@
             removeProject(index){
                 this.resume.projects.splice(index,1)
             },
+            print(){
+              window.print()
+            },
         }
     })
-let currentUser = AV.User.current()
-    console.log(currentUser)
-    console.log(currentUser.toJSON())
-    if(currentUser){
+//获取当前用户
+    let currentUser = AV.User.current()
+    if(currentUser) {
         app.currentUser = currentUser.toJSON()
         app.shareLink = location.origin + location.pathname + '?user_id=' + app.currentUser.objectId
-        app.getResume()
+        app.getResume(app.currentUser).then(resume => {
+            app.resume = resume
+        })
     }
+//获取预览用户
+    let search = location.search
+    let regex = /user_id=[^&]+/
+    let matches = search.match(regex)
+    let userId
+    if(matches){
+        userId = matches[1]
+        app.mode = "preview"
+        app.getResume({objectId:userId}).then(resume=>{
+            app.previewResume = resume
+        })
+
+    }
+
+
 }
