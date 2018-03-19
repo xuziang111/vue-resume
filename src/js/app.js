@@ -11,6 +11,7 @@
             skinChooserVisible:false,
             bodyClass:'defalut',
             mode:'edit',
+            shareLink:'',
             currentUser: {
                 objectId: undefined,
                 email:undefined,
@@ -68,11 +69,18 @@
         watch:{
             'currentUser.objectId':function(newValue,oldValue){
                 if(newValue){
-                    this.getResume(this.currentUser)
+                    this.getResume(this.currentUser).then((resume)=>this.resume=resume)
                 }
             }
         },
         methods: {
+            onShare(){
+                if(this.hasLogin()){
+                    this.shareVisible = true
+                }else{
+                    alert('请先登录')
+                }
+            },
             onEdit(key, value) {
                 let regex = /\[(\d+)\]/g
                 key = key.replace(regex,(match,number)=> `.${number}`)
@@ -89,7 +97,6 @@
             },
             onClickSave() {
                 let currentUser = AV.User.current();
-                console.log(currentUser)
                 if (!currentUser) {
                     this.showLogin()
                     this.loginVisible = true
@@ -156,22 +163,11 @@
             hasLogin(){
                 return !!this.currentUser.objectId
             },
-            onLogin(e) {
-                AV.User.logIn(this.login.email, this.login.password).then( (user) => {
-                    console.log(user);
-                    user = user.toJSON()
-                    this.loginVisible = false
-                    this.currentUser = {
-                        objectId: user.objectId,
-                        email: user.email,//
-                    }
-                },  (error) => {
-                    if (error.code === 211) {
-                        alert('邮箱不存在')
-                    } else if (error.code === 210) {
-                        alert('邮箱密码不匹配')
-                    }
-                });
+            onLogin(user) {
+                this.loginVisible = false
+                this.currentUser.objectId = user.objectId
+                this.currentUser.email = user.email
+                this.getResume(this.currentUser)
             },
             onLogout(w) {
                 AV.User.logOut()
