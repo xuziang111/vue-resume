@@ -6,8 +6,8 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Vue简历</title>
-    <link rel="stylesheet" href="./css/index-aside.css">
-    <link href="./css/index-main.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="css/index-aside.css">
+    <link href="css/index-main.css" rel="stylesheet"/>
     <link href="css/editablespan.css" rel="stylesheet"/>
     <link href="css/login.css" rel="stylesheet"/>
     <link href="css/signUp.css" rel="stylesheet"/>
@@ -18,91 +18,29 @@
 
 <body class="defalut">
 <div class="page" id="app">
-    <aside v-show="mode !== 'preview'">
-        <div class="upper">
-            <ul class="actions">
-                <li><button class="button" @click="onClickSave">保存</button></li>
-                <li><button class="button" @click="onShare">分享</button></li>
-                <li><button class="button" @click="print">打印</button></li>
-                <li><button class="button" @click="skinChooserVisible = true">换肤</button></li>
-                <li class="button" @click="mode='preview'"><button>进入预览</button></li>
-            </ul>
-        </div>
-        <div class="down">
-            <button class="button" @click="onLogout" v-show="hasLogin()">登出</button>
-        </div>
-    </aside>
-
+<app-aside v-show="mode !== 'preview'" :logout-visible="logoutVisible" @logout="onLogout" @save="onClickSave" @logout="onLogout" @skin-chooser="skinChooserVisible = true" @print="print" @share="onShare" @preview="mode = 'preview'"></app-aside>
     <main>
-        <div class="resume">
-            <section>
-                <h1>
-                    <editable-span :disable="mode !== 'preview'" :value="displayResmume.name" @edit="onEdit('name', $event)"></editable-span>
-                </h1>
-                <p>应聘职位：
-                    <editable-span :disable="mode !== 'preview'" :value="displayResmume.jobTitle" @edit="onEdit('jobTitle', $event)"></editable-span>
-                </p>
-                <p class="profile">
-                    <editable-span :disable="mode !== 'preview'" :value="displayResmume.birthday" @edit="onEdit('birthday', $event)"></editable-span>
-                    |
-                    <editable-span :disable="mode !== 'preview'" :value="displayResmume.gender" @edit="onEdit('gender', $event)"></editable-span>
-                    |
-                    <editable-span :disable="mode !== 'preview'" :value="displayResmume.email" @edit="onEdit('email', $event)"></editable-span>
-                    |
-                    <editable-span :disable="mode !== 'preview'" :value="displayResmume.phone" @edit="onEdit('phone', $event)"></editable-span>
-                </p>
-            </section>
-            <section class="skill">
-                <h2>技能</h2>
-                <ul>
-                    <li v-for="skill,index in displayResmume.skills">
-                        <editable-span :disable="mode !== 'preview'" :value="skill.name" @edit="onEdit(`skills[${index}].name`, $event)"></editable-span>
-                        <div class="description">
-                            <editable-span :disable="mode !== 'preview'" :value="skill.description" @edit="onEdit(`skills[${index}].description`, $event)"></editable-span>
-                        </div>
-                        <span class="remove" v-if="index>3 && mode === 'edit'" @click="removeSkill(index)">X</span>
-                    </li>
-                    <li class="add" v-if="mode === 'edit'"><span @click="addSkill">
-                        添加
-                    </span></li>
-                </ul>
-            </section>
-            <section class="projects">
-                <h2>项目经历</h2>
-                <ol>
-                    <li v-for="project,index in displayResmume.projects">
-                        <header>
-                            <div class="start">
-                                <h3 class="name"><editable-span :disable="mode !== 'preview'" :value="project.name" @edit="onEdit(`projects[${index}].name`, $event)"></editable-span></h3>
-                                <span class="link"><editable-span :disable="mode !== 'preview'" :value="project.link" @edit="onEdit(`projects[${index}].link`, $event)"></editable-span></span>
-                            </div>
-                            <div class="end">
-                                <span class="keywords"><editable-span :disable="mode !== 'preview'" :value="project.keywords" @edit="onEdit(`projects[${index}].keywords`, $event)"></editable-span></span>
-                            </div>
-                        </header>
-                        <p class="description"><editable-span :disable="mode !== 'preview'" :value="project.description" @edit="onEdit(`projects[${index}].description`, $event)"></editable-span></p>
-                        <span v-if="index>1 && mode === 'edit'" @click="removeProject(index)">X</span>
-                    </li>
-                    <li class="add" v-if="mode === 'edit'"><span @click="addProject">添加</span></li>
-                </ol>
-            </section>
-        </div>
+        <resume :mode="mode" :display-resume="displayResume" :resume="resume"></resume>
     </main>
-    <login v-show="loginVisible" @close="loginVisible=false" @login="onLogin"></login>
-    <sign-up v-show="signUpVisible"></sign-up>
-    <share :share-link="shareLink" v-show="shareVisible"></share>
+    <login v-show="loginVisible" @close="loginVisible=false" @login="onLogin" @gotosignup="signUpVisible = true;loginVisible = false"></login>
+    <sign-up v-show="signUpVisible" @close="signUpVisible=false" @signup="onSignUp" @gotologin="signUpVisible = false;loginVisible = true"></sign-up>
+    <share :share-link="shareLink" v-show="shareVisible" @close-share="shareVisible = false"></share>
     <button class="exitPre" @click="mode ='edit'" v-if="mode ==='preview'">退出预览</button>
-    <skin-chooser v-show="skinChooserVisible"></skin-chooser>
+    <skin-chooser v-show="skinChooserVisible" @close-skin="skinChooserVisible = false"></skin-chooser>
 </div>
 <script src="../vendors/av-min.js"></script>
 <script src="../vendors/vue.min.js"></script>
+<script src="../vendors/vue-router.min.js"></script>
 <script src="./js/av.js"></script>
 <script src="./js/editable-span.js"></script>
+<script src="./js/resume.js"></script>
+<script src="./js/aside.js"></script>
 <script src="./js/app.js"></script>
 <script src="./js/login.js"></script>
 <script src="./js/share.js"></script>
 <script src="./js/signUp.js"></script>
 <script src="./js/skinChooser.js"></script>
+
 
 <script>
 

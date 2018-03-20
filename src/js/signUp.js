@@ -16,12 +16,10 @@ Vue.component('sign-up',{
             user.signUp().then( (user) => {
                 console.log(user)
                 alert('注册成功')
-                loginVisible = false
-                signUpVisible = false
                 AV.User.logIn(this.signUp.email, this.signUp.password).then( (user) => {
                     console.log(user);
                     user = user.toJSON()
-                    this.$emit('signUp')
+                    this.$emit('signup')
                     // this.loginVisible = false
                     // this.currentUser = {
                     //     objectId: user.objectId,
@@ -43,7 +41,7 @@ Vue.component('sign-up',{
    <div class="signUp" v-cloak>
         <form class="form" @submit.prevent="onSignUp">
             <h2>注册</h2>
-            <button @click="signUpVisible = false" type="button">关闭</button>
+            <span @click="$emit('close')">X</span>
             <div class="row">
                 <label>邮箱</label>
                 <input v-model="signUp.email" type="text" name="user">
@@ -54,7 +52,7 @@ Vue.component('sign-up',{
             </div>
             <div class="action">
                 <button type="submit">提交</button>
-                <a href="#" @click="onClickLogin">登录</a>
+                <a href="#" @click="$emit('gotologin')">去登录</a>
             <!--signUpVisible = false;loginVisible = true-->
             </div>
         </form>

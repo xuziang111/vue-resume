@@ -9,7 +9,7 @@ Vue.component('skin-chooser',{
         <div class="skinChooser-bg">
             <button @click="setTheme('defalut')">默认</button>
             <button @click="setTheme('blue-grey')">蓝灰色</button>
-            <button @click="skinChooserVisible = false" type="button">关闭</button>
+            <button @click="$emit('close-skin')" type="button">关闭</button>
         </div>
     </div>
 </div>

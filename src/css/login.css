@@ -8,9 +8,33 @@
     display:flex;
     justify-content: center;
     align-items: center;
+    color:rgb(0,135,255)
 }
 .login>.form{
-    background:red;
+    background:white;
     min-width: 300px;
     min-height: 400px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position:relative;
+    background:rgb(237,244,250);
+}
+.login input{
+    border:none;
+    border-bottom:1px solid grey;
+}
+.login > .form >span{
+    position: absolute;
+    top:0;
+    right:0;
+    cursor: pointer;
+}
+.login > .form  button{
+    border:none;
+    background:inherit;
+    color:inherit;
+    cursor: pointer;
+    font-size:16px;
 }

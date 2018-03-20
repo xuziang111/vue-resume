@@ -27,14 +27,14 @@ Vue.component('login',{
             });
         },
         onClickSignUp(){
-            this.$emit('goToSignUp')
+            this.$emit('goto-signup')
         },
     },
     template:`
     <div class="login" v-cloak>
         <form class="form" @submit.prevent="onLogin">
             <h2>登录</h2>
-            <button @click="$emit('close')" type="button">关闭</button>
+            <span @click="$emit('close')" type="button">X</span>
             <div class="row">
                 <label>邮箱</label>
                 <input v-model="login.email" type="text" name="user">
@@ -44,8 +44,8 @@ Vue.component('login',{
                 <input v-model="login.password" type="password" name="password">
             </div>
             <div class="action">
-                <button>提交</button>
-                <a href="#" @click="onClickSignUp">注册</a>
+                <button type="submit">提交</button>
+                <a href="#" @click="$emit('gotosignup')">去注册</a>
                 <!--signUpVisible = true;loginVisible = false-->
             </div>
         </form>

@@ -9,9 +9,9 @@
             shareLink:'',
             shareVisible:false,
             skinChooserVisible:false,
+            logoutVisible:false,
             bodyClass:'defalut',
             mode:'edit',
-            shareLink:'',
             currentUser: {
                 objectId: undefined,
                 email:undefined,
@@ -62,7 +62,7 @@
             },
         },
         computed:{
-            displayResmume(){
+            displayResume(){
                 return this.mode === 'preview' ? this.previewResume:this.resume
             }
         },
@@ -77,8 +77,9 @@
             onShare(){
                 if(this.hasLogin()){
                     this.shareVisible = true
+                    console.log('this.shareVisible')
                 }else{
-                    alert('请先登录')
+                    alert('请先点击保存登录')
                 }
             },
             onEdit(key, value) {
@@ -134,47 +135,28 @@
                 });
             },
             onSignUp() {
-                console.log(this.signUp)
-                const user = new AV.User()
-                user.setUsername(this.signUp.email)
-                user.setPassword(this.signUp.password)
-                user.setEmail(this.signUp.email)
-                user.signUp().then( (user) => {
-                    console.log(user)
-                    alert('注册成功')
-                    loginVisible = false
-                    signUpVisible = false
-                    AV.User.logIn(this.signUp.email, this.signUp.password).then( (user) => {
-                        console.log(user);
-                        user = user.toJSON()
-                        this.loginVisible = false
-                        this.currentUser = {
-                            objectId: user.objectId,
-                            email: user.email,//
-                        }
-                    })
-
-
-                },  (error) => {
-                    alert(error.rawMessage)
-                });
-
+                    this.loginVisible = false
+                    this.signUpVisible = false
             },
             hasLogin(){
                 return !!this.currentUser.objectId
             },
             onLogin(user) {
                 this.loginVisible = false
+                this.logoutVisible = true;
                 this.currentUser.objectId = user.objectId
                 this.currentUser.email = user.email
                 this.getResume(this.currentUser)
+                console.log(location.origin + location.pathname + '?user_id=' + this.currentUser.objectId)
+                this.shareLink = location.origin + location.pathname + '?user_id=' + this.currentUser.objectId
             },
-            onLogout(w) {
+            onLogout() {
                 AV.User.logOut()
                 this.currentUser = {
                     objectId: undefined,
                     email:undefined,
                 }
+                this.logoutVisible = false;
                 alert('注销成功')//清除用户缓存
             },
             getResume(user){
@@ -215,6 +197,7 @@
         app.shareLink = location.origin + location.pathname + '?user_id=' + app.currentUser.objectId
         app.getResume(app.currentUser).then(resume => {
             app.resume = resume
+            app.logoutVisible = true
         })
     }
 //获取预览用户
