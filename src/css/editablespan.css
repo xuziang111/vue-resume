@@ -5,16 +5,18 @@
 
 .editableSpan {
     position: relative;
+    line-height:24px;
 }
 
 .editableSpan button {
     display: none;
-    position: absolute;
-    left: 100%;
-    top: 0;
+    margin-top:-5px;
+    line-height:14px;
     z-index: 1;
 }
-
+.editableSpan span{
+    cursor: pointer;
+}
 .editableSpan:hover button {
-    display: inline-block;
+    display: inline;
 }

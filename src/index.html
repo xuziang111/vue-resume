@@ -20,7 +20,7 @@
 <div class="page" id="app">
 <app-aside v-show="mode !== 'preview'" :logout-visible="logoutVisible" @logout="onLogout" @save="onClickSave" @logout="onLogout" @skin-chooser="skinChooserVisible = true" @print="print" @share="onShare" @preview="mode = 'preview'"></app-aside>
     <main>
-        <resume :mode="mode" :display-resume="displayResume" :resume="resume"></resume>
+        <resume :mode="mode" :display-resume="displayResume" :resume="resume" @on-edit="onEdit"></resume>
     </main>
     <login v-show="loginVisible" @close="loginVisible=false" @login="onLogin" @gotosignup="signUpVisible = true;loginVisible = false"></login>
     <sign-up v-show="signUpVisible" @close="signUpVisible=false" @signup="onSignUp" @gotologin="signUpVisible = false;loginVisible = true"></sign-up>

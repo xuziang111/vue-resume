@@ -8,28 +8,38 @@
     display:flex;
     justify-content: center;
     align-items: center;
-    color:rgb(0,135,255)
+    color:rgb(0,135,255);
+    box-sizing: border-box;
 }
 .login>.form{
     background:white;
     min-width: 300px;
-    min-height: 400px;
+    min-height: 200px;
     display:flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     position:relative;
     background:rgb(237,244,250);
+    border-radius:20px;
 }
 .login input{
     border:none;
     border-bottom:1px solid grey;
 }
+.login > .form >h2{
+    margin-top:-20px;
+    margin-bottom:20px;
+}
 .login > .form >span{
+    font-size:20px;
     position: absolute;
-    top:0;
-    right:0;
+    top:16px;
+    right:16px;
     cursor: pointer;
+}
+.login > .form >span:hover{
+    background:rgb(220,220,220);
 }
 .login > .form  button{
     border:none;

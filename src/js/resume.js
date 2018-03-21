@@ -21,28 +21,28 @@ Vue.component('resume',{
     <div class="resume">
             <section>
                 <h1>
-                    <editable-span :disable="mode !== 'preview'" :value="displayResume.name" @edit="onEdit('name', $event)"></editable-span>
+                    <editable-span :disable="mode !== 'preview'" :value="displayResume.name" @edit="$emit('on-edit','name', $event)"></editable-span>
                 </h1>
                 <p>应聘职位：
-                    <editable-span :disable="mode !== 'preview'" :value="displayResume.jobTitle" @edit="onEdit('jobTitle', $event)"></editable-span>
+                    <editable-span :disable="mode !== 'preview'" :value="displayResume.jobTitle" @edit="$emit('on-edit','jobTitle', $event)"></editable-span>
                 </p>
                 <p class="profile">
-                    <editable-span :disable="mode !== 'preview'" :value="displayResume.birthday" @edit="onEdit('birthday', $event)"></editable-span>
+                    <editable-span :disable="mode !== 'preview'" :value="displayResume.birthday" @edit="$emit('on-edit','birthday', $event)"></editable-span>
                     |
-                    <editable-span :disable="mode !== 'preview'" :value="displayResume.gender" @edit="onEdit('gender', $event)"></editable-span>
+                    <editable-span :disable="mode !== 'preview'" :value="displayResume.gender" @edit="$emit('on-edit','gender', $event)"></editable-span>
                     |
-                    <editable-span :disable="mode !== 'preview'" :value="displayResume.email" @edit="onEdit('email', $event)"></editable-span>
+                    <editable-span :disable="mode !== 'preview'" :value="displayResume.email" @edit="$emit('on-edit','email', $event)"></editable-span>
                     |
-                    <editable-span :disable="mode !== 'preview'" :value="displayResume.phone" @edit="onEdit('phone', $event)"></editable-span>
+                    <editable-span :disable="mode !== 'preview'" :value="displayResume.phone" @edit="$emit('on-edit','phone', $event)"></editable-span>
                 </p>
             </section>
             <section class="skill">
                 <h2>技能</h2>
                 <ul>
                     <li v-for="skill,index in displayResume.skills">
-                        <editable-span :disable="mode !== 'preview'" :value="skill.name" @edit="onEdit('skills[' + index +' ].name', $event)"></editable-span>
+                        <editable-span :disable="mode !== 'preview'" :value="skill.name" @edit="$emit('on-edit','skills[' + index +' ].name', $event)"></editable-span>
                         <div class="description">
-                            <editable-span :disable="mode !== 'preview'" :value="skill.description" @edit="onEdit('skills[' + index +' ].description', $event)"></editable-span>
+                            <editable-span :disable="mode !== 'preview'" :value="skill.description" @edit="$emit('on-edit','skills[' + index +' ].description', $event)"></editable-span>
                         </div>
                         <span class="remove" v-if="index>3 && mode === 'edit'" @click="removeSkill(index)">X</span>
                     </li>

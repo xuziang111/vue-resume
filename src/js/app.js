@@ -17,11 +17,11 @@
                 email:undefined,
             },
             previewResume:{
-                name: 'xxx',
-                gender: '男',
-                birthday: '',
-                jobTitle: '前端工程师',
-                phone: '1111111111111',
+                name: '姓名',
+                gender: '性别',
+                birthday: '出生年月',
+                jobTitle: '应聘职位',
+                phone: '电话号码',
                 email: 'example@example.com',
                 skills:[
                     {name:'请填写技能名称',description:'请填写技能描述'},
@@ -35,11 +35,11 @@
                 ],
             },
             resume: {
-                name: 'xxx',
-                gender: '男',
-                birthday: '',
-                jobTitle: '前端工程师',
-                phone: '1111111111111',
+                name: '姓名',
+                gender: '性别',
+                birthday: '出生年月',
+                jobTitle: '应聘职位',
+                phone: '电话号码',
                 email: 'example@example.com',
                 skills:[
                     {name:'请填写技能名称',description:'请填写技能描述'},
@@ -83,6 +83,7 @@
                 }
             },
             onEdit(key, value) {
+                console.log(key)
                 let regex = /\[(\d+)\]/g
                 key = key.replace(regex,(match,number)=> `.${number}`)
                 keys = key.split('.');
