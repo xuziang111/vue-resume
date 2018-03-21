@@ -15,10 +15,10 @@
     padding:5px;
 }
 aside{
-    background:rgba(232,244,247,0.5);
+    background:rgba(57,78,105,1);
 }
 .page>aside>.upper >.actions>li:hover{
-    background:rgba(222,222,222,1);
+    background:rgba(204,211,217,1);
 }
 
 .page>aside>.upper>.actions>li{

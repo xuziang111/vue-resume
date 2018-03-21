@@ -24,14 +24,14 @@
                 phone: '电话号码',
                 email: 'example@example.com',
                 skills:[
-                    {name:'请填写技能名称',description:'请填写技能描述'},
-                    {name:'请填写技能名称',description:'请填写技能描述'},
-                    {name:'请填写技能名称',description:'请填写技能描述'},
-                    {name:'请填写技能名称',description:'请填写技能描述'},
+                    {name:'HTML、CSS',description:'有良好的HTML、CSS基础,能完美还原设计稿样式。'},
+                    {name:'JavasScript',description:'熟练使用js编程，对闭包、原型链等都有所了解。'},
+                    {name:'vue jquery等',description:'有jquery 、vue等前端框架开发经验，能熟练使用框架编写页面。'},
+                    {name:'移动端页面',description:'会使用 REM、vw/vh、vconsole等技术制作调试移动端页面。'},
                 ],
                 projects:[
-                    {name:'请填写项目名称',link:'http://xxx.com',keywords:'请填写关键词',description:'请详细描述',},
-                    {name:'请填写项目名称',link:'http://xxx.com',keywords:'请填写关键词',description:'请详细描述',}
+                    {name:'网易云移动端',link:'https://lolimy.club/163-music/src/',keywords:'移动端 JQuery rem',description:'仿网易云客移动端，实现大部分功能。还有一个https://lolimy.club/163-music/src/admin的在线上传页面',},
+                    {name:'vue在线简历',link:'https://lolimy.club/vue-resume/src/',keywords:'vue 在线注册、保存',description:'一个用Vue编写的在线简历编辑器，可以注册登录账号保存内容。',}
                 ],
             },
             resume: {
@@ -42,14 +42,14 @@
                 phone: '电话号码',
                 email: 'example@example.com',
                 skills:[
-                    {name:'请填写技能名称',description:'请填写技能描述'},
-                    {name:'请填写技能名称',description:'请填写技能描述'},
-                    {name:'请填写技能名称',description:'请填写技能描述'},
-                    {name:'请填写技能名称',description:'请填写技能描述'},
+                    {name:'HTML、CSS',description:'有良好的HTML、CSS基础,能完美还原设计稿样式。'},
+                    {name:'JavasScript',description:'熟练使用js编程，对闭包、原型链等都有所了解。'},
+                    {name:'vue jquery等',description:'有jquery 、vue等前端框架开发经验，能熟练使用框架编写页面。'},
+                    {name:'移动端页面',description:'会使用 REM、vw/vh、vconsole等技术制作调试移动端页面。'},
                 ],
                 projects:[
-                    {name:'请填写项目名称',link:'http://xxx.com',keywords:'请填写关键词',description:'请详细描述',},
-                    {name:'请填写项目名称',link:'http://xxx.com',keywords:'请填写关键词',description:'请详细描述',}
+                    {name:'网易云移动端',link:'https://lolimy.club/163-music/src/',keywords:'移动端 JQuery rem',description:'仿网易云客移动端，实现大部分功能。还有一个https://lolimy.club/163-music/src/admin的在线上传页面',},
+                    {name:'vue在线简历',link:'https://lolimy.club/vue-resume/src/',keywords:'vue 在线注册、保存',description:'一个用Vue编写的在线简历编辑器，可以注册登录账号保存内容。',}
                 ],
             },
             signUp: {

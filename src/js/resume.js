@@ -11,7 +11,7 @@ Vue.component('resume',{
             this.resume.skills.splice(index,1)
         },
         addProject(){
-            this.resume.projects.push({name:'请填写技能名称',description:'请填写技能描述'})
+            this.resume.projects.push({name:'请填写项目名称',link:'请填写项目链接',keywords:'关键词',description:'请填写项目描述',})
         },
         removeProject(index){
             this.resume.projects.splice(index,1)
@@ -40,9 +40,9 @@ Vue.component('resume',{
                 <h2>技能</h2>
                 <ul>
                     <li v-for="skill,index in displayResume.skills">
-                        <editable-span :disable="mode !== 'preview'" :value="skill.name" @edit="$emit('on-edit','skills[' + index +' ].name', $event)"></editable-span>
+                        <editable-span :disable="mode !== 'preview'" :value="skill.name" @edit="$emit('on-edit','skills[' + index +'].name', $event)"></editable-span>
                         <div class="description">
-                            <editable-span :disable="mode !== 'preview'" :value="skill.description" @edit="$emit('on-edit','skills[' + index +' ].description', $event)"></editable-span>
+                            <editable-span :disable="mode !== 'preview'" :value="skill.description" @edit="$emit('on-edit','skills[' + index +'].description', $event)"></editable-span>
                         </div>
                         <span class="remove" v-if="index>3 && mode === 'edit'" @click="removeSkill(index)">X</span>
                     </li>
@@ -57,14 +57,14 @@ Vue.component('resume',{
                     <li v-for="project,index in displayResume.projects">
                         <header>
                             <div class="start">
-                                <h3 class="name"><editable-span :disable="mode !== 'preview'" :value="project.name" @edit="onEdit('projects[' + index + '].name', $event)"></editable-span></h3>
-                                <span class="link"><editable-span :disable="mode !== 'preview'" :value="project.link" @edit="onEdit('projects[' + index + '].link', $event)"></editable-span></span>
+                                <h3 class="name"><editable-span :disable="mode !== 'preview'" :value="project.name" @edit="$emit('on-edit','projects[' + index + '].name', $event)"></editable-span></h3>
+                                <span class="link"><editable-span :disable="mode !== 'preview'" :value="project.link" @edit="$emit('on-edit','projects[' + index + '].link', $event)"></editable-span></span>
                             </div>
                             <div class="end">
-                                <span class="keywords"><editable-span :disable="mode !== 'preview'" :value="project.keywords" @edit="onEdit('projects[' + index + '].keywords', $event)"></editable-span></span>
+                                <span class="keywords">关键词:<editable-span :disable="mode !== 'preview'" :value="project.keywords" @edit="$emit('on-edit','projects[' + index + '].keywords', $event)"></editable-span></span>
                             </div>
                         </header>
-                        <p class="description"><editable-span :disable="mode !== 'preview'" :value="project.description" @edit="onEdit('projects[' + index + '].description', $event)"></editable-span></p>
+                        <p class="description"><editable-span :disable="mode !== 'preview'" :value="project.description" @edit="$emit('on-edit','projects[' + index + '].description', $event)"></editable-span></p>
                         <span v-if="index>1 && mode === 'edit'" @click="removeProject(index)">X</span>
                     </li>
                     <li class="add" v-if="mode === 'edit'"><span @click="addProject">添加</span></li>
