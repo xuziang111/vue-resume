@@ -1,0 +1,41 @@
+
+    .page {
+        height: 100vh;
+        overflow: hidden;
+        display: flex;
+    }
+.page>aside{
+    position:fixed;
+    top:0;
+    width:100%;
+    flex-direction:row;
+    justify-content: space-between;
+    text-align: center;
+    display:flex;
+    padding:5px;
+}
+aside{
+    background:rgba(57,78,105,1);
+}
+    .page>aside>.upper >.actions{
+        display:flex;
+        flex-direction:row;
+    }
+.page>aside>.upper >.actions>li:hover{
+    background:rgba(204,211,217,1);
+}
+
+.page>aside>.upper>.actions>li{
+    border-right:1px solid grey;
+    cursor: pointer;
+}
+
+.page>aside button{
+    border:none;
+    background:inherit;
+    outline:none;
+    cursor: pointer;
+}
+    main{
+        margin-top:40px;
+    }
